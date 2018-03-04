@@ -1,0 +1,55 @@
+
+
+<div class="row">
+  <div class="col m9 ">   
+      <input type="text" id="search" name="search" placeholder="search" [(ngModel)]="searchStr" >
+    <div class="collection hoverable" *ngFor="let item of todos | search:searchStr">
+      <p class="collection-item deep-orange" *ngIf="!item.isDone">
+        {{ item.name | uppercase }}
+        <span class="badge light-blue lighten-2" data-badge-caption *ngFor="let tag of item.tags">{{tag.name}}</span>
+        <span style="float:right">{{ item.date | date:"dd/MM/yyyy" }}</span>
+      </p>
+      <p class="collection-item  blue-grey lighten-1" *ngIf="item.isDone">
+        {{ item.name | uppercase }}
+        <span class="badge grey" data-badge-caption *ngFor="let tag of item.tags">{{tag.name}}</span>
+        <span style="float:right">{{ item.date | date:"dd/MM/yyyy" }}</span>
+      </p>
+      <p class="collection-item ">
+        {{item.description}}
+      </p>
+       <p class="collection-item">
+          <i class="small material-icons" (click)="deleteTodo(item.id)">delete</i>
+
+          <i class="small material-icons" (click)="getTodoById(item.id)">edit</i>
+    
+          <i class="switch" *ngIf="item.isDone" (change)="onchange(item.id)">
+            <label style="float:right;">
+              DONE
+              <input type="checkbox" checked="checked">
+              <span class="lever"></span>
+            </label>
+          </i>
+          <i class="switch" *ngIf="!item.isDone" (change)="onchange(item.id)">
+            <label style="float:right;">
+              <input type="checkbox">
+              <span class="lever"></span>
+            </label>
+          </i>
+    
+       </p>
+     
+    </div>
+  </div>
+  <div class="col m3">
+    <form action="" method="POST">
+      <input type="date" name="date" [(ngModel)]="todo.date">
+      <input type="text" placeholder="name" name="name" [(ngModel)]="todo.name">
+      <textarea name="description" cols="30" rows="10" [(ngModel)]="todo.description"></textarea>
+
+      <input class="waves-effect waves-light btn" *ngIf="isEdit" type="submit" name="edit" value="Save change" (click)="editTodo()">
+      <input class="waves-effect waves-light btn" *ngIf="!isEdit" type="submit" name="add" value="Add" (click)="addTodo()">
+
+    </form>
+    
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<nav style="background-color:#5a5a5a">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">TODOLIST</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li>
+                <a routerLink="login">Login</a>
+            </li>
+            <li>
+                <a  (click)="logOut()">LogOut</a>
+            </li>
+            <!-- <li>
+                    <a routerLink="registration">Registration</a>
+           </li> -->
+        </ul>
+    </div>
+</nav>
+<router-outlet></router-outlet>
